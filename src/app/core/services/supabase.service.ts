@@ -24,11 +24,13 @@ export class SupabaseService {
     return data.user;
   }
 
-  async signInWithMagicLink(email: string): Promise<void> {
-    const { error } = await this.client.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
-    });
+  async signInWithPassword(email: string, password: string): Promise<void> {
+    const { error } = await this.client.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+  }
+
+  async signUp(email: string, password: string): Promise<void> {
+    const { error } = await this.client.auth.signUp({ email, password });
     if (error) throw error;
   }
 

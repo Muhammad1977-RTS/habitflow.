@@ -37,8 +37,12 @@ export class AuthService {
     return !!this.user();
   }
 
-  async sendMagicLink(email: string): Promise<void> {
-    await this.supabase.signInWithMagicLink(email);
+  async signIn(email: string, password: string): Promise<void> {
+    await this.supabase.signInWithPassword(email, password);
+  }
+
+  async signUp(email: string, password: string): Promise<void> {
+    await this.supabase.signUp(email, password);
   }
 
   async signOut(): Promise<void> {
